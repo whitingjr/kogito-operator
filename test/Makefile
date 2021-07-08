@@ -64,6 +64,12 @@ examples_uri=
 examples_ref=
 # Infinispan
 infinispan_installation_source=
+# hyperfoil operator information
+hyperfoil_operator_image=
+hyperfoil_operator_tag=
+hyperfoil_operator_namespaced=false
+hyperfoil_operator_installation_source=
+hyperfoil_operator_catalog_image=
 # dev options
 show_scenarios=false
 show_steps=false
@@ -141,6 +147,11 @@ run-tests:
 		--operator_installation_source ${operator_installation_source} \
 		--operator_catalog_image ${operator_catalog_image} \
 		--infinispan_installation_source ${infinispan_installation_source} \
+		--hyperfoil_operator_image $(hyperfoil_operator_image) \
+		--hyperfoil_operator_tag $(hyperfoil_operator_tag) \
+		--hyperfoil_operator_yaml_uri ${hyperfoil_operator_yaml_uri} \
+		--hyperfoil_operator_profiling_data_access_yaml_uri ${hyperfoil_operator_profiling_data_access_yaml_uri} \
+		--hyperfoil_operator_profiling_output_file_uri ${hyperfoil_operator_profiling_output_file_uri} \
 		$${opts_str}
 
 .PHONY: build-examples-images

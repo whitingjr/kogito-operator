@@ -27,6 +27,13 @@ func registerOperatorSteps(ctx *godog.ScenarioContext, data *Data) {
 	ctx.Step(`^CLI install Kogito operator$`, data.cliInstallKogitoOperator)
 }
 
+func registerHyperfoilOperatorSteps(ctx *godog.ScenarioContext, data *Data) {
+	ctx.Step(`^Hyperfoil operator should be installed$`, data.hyperfoilOperatorShouldBeInstalled)
+	ctx.Step(`^Hyperfoil Operator is deployed$`, data.hyperfoilOperatorIsDeployed)
+
+	ctx.Step(`^CLI install Hyperfoil operator$`, data.cliInstallHyperfoilOperator)
+}
+
 func (data *Data) kogitoOperatorShouldBeInstalled() error {
 	return framework.WaitForKogitoOperatorRunning(data.Namespace)
 }
@@ -43,6 +50,26 @@ func (data *Data) kogitoOperatorIsDeployed() error {
 }
 
 func (data *Data) cliInstallKogitoOperator() error {
+	_, err := framework.ExecuteCliCommandInNamespace(data.Namespace, "install", "operator")
+	return err
+}
+
+func (data *Data) hyperfoilOperatorShouldBeInstalled() error {
+	return framework.WaitForKogitoOperatorRunning(data.Namespace)
+}
+
+func (data *Data) hyperfoilOperatorIsDeployed() error {
+	installer, err := installers.GetKogitoInstaller()
+	if err != nil {
+		return err
+	}
+	if err := installer.Install(data.Namespace); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (data *Data) cliInstallHyperfoilOperator() error {
 	_, err := framework.ExecuteCliCommandInNamespace(data.Namespace, "install", "operator")
 	return err
 }

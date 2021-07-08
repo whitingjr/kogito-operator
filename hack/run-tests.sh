@@ -110,6 +110,13 @@ function usage(){
   # Infinispan
   printf "\n--infinispan_installation_source {TAG}\n\tDefines installation source for the Infinispan operator. Options are 'olm' and 'yaml'. Default is olm."
 
+  # hyperfoil operator information
+  printf "\n--hyperfoil_operator_image {NAME}\n\tOperator image name. Default is 'quay.io/hyperfoil/hyperfoil-operator-bundle' one."
+  printf "\n--hyperfoil_operator_tag {TAG}\n\tOperator image tag. Default is hyperfoil operator version."
+  printf "\n--hyperfoil_operator_namespaced {TAG}\n\tSet to true to deploy Hyperfoil operator into namespace used for scenario execution, false for cluster wide deployment. Default is false."
+  printf "\n--hyperfoil_operator_installation_source {TAG}\n\tDefines installation source for the Hyperfoil operator. Options are 'olm' and 'yaml'. Default is yaml."
+  printf "\n--hyperfoil_operator_catalog_image {TAG}\n\tDefines image containing operator catalog. Needs to be specified only when operator_installation_source is 'olm'."
+
   # dev options
   printf "\n--show_scenarios\n\tDisplay scenarios which will be executed."
   printf "\n--show_steps\n\tDisplay scenarios and their steps which will be executed."
@@ -429,6 +436,28 @@ case $1 in
   --infinispan_installation_source)
     shift
     if addParamKeyValueIfAccepted "--tests.infinispan-installation-source" ${1}; then shift; fi
+  ;;
+
+  # hyperfoil operator information
+  --hyperfoil_operator_image)
+    shift
+    if addParamKeyValueIfAccepted "--tests.hyperfoil-operator-image-name" ${1}; then shift; fi
+  ;;
+  --hyperfoil_operator_tag)
+    shift
+    if addParamKeyValueIfAccepted "--tests.hyperfoil-operator-image-tag" ${1}; then shift; fi
+  ;;
+  --hyperfoil_operator_namespaced)
+    addParam "--tests.hyperfoil-operator-namespaced"
+    shift
+  ;;
+  --hyperfoil_operator_installation_source)
+    shift
+    if addParamKeyValueIfAccepted "--tests.hyperfoil-operator-installation-source" ${1}; then shift; fi
+  ;;
+  --hyperfoil_operator_catalog_image)
+    shift
+    if addParamKeyValueIfAccepted "--tests.hyperfoil-operator-catalog-image" ${1}; then shift; fi
   ;;
 
   # dev options

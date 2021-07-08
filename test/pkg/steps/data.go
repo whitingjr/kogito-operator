@@ -70,6 +70,7 @@ func (data *Data) RegisterAllSteps(ctx *godog.ScenarioContext) {
 	registerMongoDBSteps(ctx, data)
 	registerOpenShiftSteps(ctx, data)
 	registerOperatorSteps(ctx, data)
+	registerHyperfoilOperatorSteps(ctx, data)
 	registerPrometheusSteps(ctx, data)
 	registerProcessSteps(ctx, data)
 	registerTaskSteps(ctx, data)
